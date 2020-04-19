@@ -1,0 +1,200 @@
+openapi: 3.0.0
+
+info:
+  title: Examples
+  description: This specification defines operations on the examples resource
+  version: 1.0.0
+
+paths:
+  /example:
+    get:
+      tags:
+        - Example
+      summary: Get all examples.
+      operationId: findAll
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Example'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Example
+      summary: Create new example.
+      operationId: create
+      requestBody:
+        description: New example.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /example/{exampleId}:
+    get:
+      tags:
+        - Example
+      summary: Get example by ID.
+      operationId: findById
+      parameters:
+        - $ref: '#/components/parameters/ExampleIdIdParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Example
+      summary: Update example by ID.
+      operationId: update
+      parameters:
+        - $ref: '#/components/parameters/ExampleIdIdParam'
+      requestBody:
+        description: example to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Example
+      summary: Delete example by ID.
+      operationId: deleteById
+      parameters:
+        - $ref: '#/components/parameters/ExampleIdIdParam'
+      responses:
+        '204':
+          description: No content
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+
+components:
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    Example:
+      type: object
+      required:
+        - exampleId
+        - name
+      properties:
+        exampleId:
+          type: integer
+          format: int64
+          description: Example entity id.
+          default: 0
+        version:
+          type: integer
+          format: int32
+          description: version example.
+          default: 1
+        name:
+          type: string
+          description: Name example.
+          maxLength: 50
+
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: The error code.
+        debugInfo:
+          type: string
+          description: The debug info.
+
+  parameters:
+    ExampleIdIdParam:
+      in: path
+      name: exampleId
+      description: The primary key of config snapshot.
+      required: true
+      schema:
+        type: integer
+        format: int64
