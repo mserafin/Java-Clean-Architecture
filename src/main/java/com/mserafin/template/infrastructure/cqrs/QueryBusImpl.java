@@ -35,22 +35,4 @@ public class QueryBusImpl extends ObservableBus<Query> implements QueryBus
 
         return (TResult) queryHandler.get().execute(query);
     }
-
-//    private final QueryHandler queryHandler;
-//
-//    public QueryBusImpl(final QueryHandler queryHandler)
-//    {
-//        this.queryHandler = queryHandler;
-//    }
-//
-//    @Override
-//    public <TQuery extends Query<TResult>, TResult> TResult process(final TQuery query)
-//    {
-//        if (Objects.equals(query, null))
-//        {
-//            throw new IllegalArgumentException();
-//        }
-//
-//        return (TResult) queryHandler.execute(query);
-//    }
 }
