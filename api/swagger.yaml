@@ -21,8 +21,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Example'
-        '401':
-          $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
     post:
@@ -46,10 +44,6 @@ paths:
                 $ref: '#/components/schemas/Example'
         '400':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
         '500':
           $ref: '#/components/responses/500'
 
@@ -60,7 +54,7 @@ paths:
       summary: Get example by ID.
       operationId: findById
       parameters:
-        - $ref: '#/components/parameters/ExampleIdIdParam'
+        - $ref: '#/components/parameters/ExampleIdParam'
       responses:
         '200':
           description: Successful response
@@ -68,8 +62,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Example'
-        '401':
-          $ref: '#/components/responses/401'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -80,7 +72,7 @@ paths:
       summary: Update example by ID.
       operationId: update
       parameters:
-        - $ref: '#/components/parameters/ExampleIdIdParam'
+        - $ref: '#/components/parameters/ExampleIdParam'
       requestBody:
         description: example to update.
         required: true
@@ -97,10 +89,6 @@ paths:
                 $ref: '#/components/schemas/Example'
         '400':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -111,14 +99,10 @@ paths:
       summary: Delete example by ID.
       operationId: deleteById
       parameters:
-        - $ref: '#/components/parameters/ExampleIdIdParam'
+        - $ref: '#/components/parameters/ExampleIdParam'
       responses:
         '204':
           description: No content
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -128,18 +112,6 @@ components:
   responses:
     '400':
       description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    '403':
-      description: Forbidden
       content:
         application/json:
           schema:
@@ -190,7 +162,7 @@ components:
           description: The debug info.
 
   parameters:
-    ExampleIdIdParam:
+    ExampleIdParam:
       in: path
       name: exampleId
       description: The primary key of config snapshot.
