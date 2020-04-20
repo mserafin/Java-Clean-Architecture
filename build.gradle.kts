@@ -1,7 +1,6 @@
 plugins {
     id("org.springframework.boot") version "2.2.6.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    id("io.swagger.core.v3.swagger-gradle-plugin") version "2.1.2"
     kotlin("jvm") version "1.3.71"
     kotlin("plugin.spring") version "1.3.71"
 }
